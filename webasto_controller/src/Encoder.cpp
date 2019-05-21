@@ -4,6 +4,10 @@
 
 #include "Encoder.h"
 
+
+const uint8_t Encoder::encoderDelay = 5;
+
+
 Encoder::Encoder(uint8_t pinA, uint8_t pinB)
 :
 pinA(pinA),

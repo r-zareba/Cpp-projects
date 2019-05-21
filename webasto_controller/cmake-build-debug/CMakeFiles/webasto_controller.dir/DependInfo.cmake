@@ -4,9 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/rafal/Desktop/C_projects/webasto_controller/src/Encoder.cpp" "/home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o"
-  "/home/rafal/Desktop/C_projects/webasto_controller/src/Menu.cpp" "/home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/src/Menu.cpp.o"
-  "/home/rafal/Desktop/C_projects/webasto_controller/src/main.cpp" "/home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/src/main.cpp.o"
+  "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Button.cpp" "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/src/Button.cpp.o"
+  "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Encoder.cpp" "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o"
+  "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Menu.cpp" "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/src/Menu.cpp.o"
+  "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/main.cpp" "/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

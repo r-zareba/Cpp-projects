@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/webasto_controller.dir/src/Button.cpp.o"
   "CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o"
   "CMakeFiles/webasto_controller.dir/src/Menu.cpp.o"
   "CMakeFiles/webasto_controller.dir/src/main.cpp.o"

@@ -43,10 +43,10 @@ RM = /home/rafal/Desktop/clion-2019.1.2/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafal/Desktop/C_projects/webasto_controller
+CMAKE_SOURCE_DIR = /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug
+CMAKE_BINARY_DIR = /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug
 
 # Utility rule file for PLATFORMIO_REBUILD_PROJECT_INDEX.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/rafal/Desktop/C_projects/webasto_controller/cmake-build
 include CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/progress.make
 
 CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX:
-	cd /home/rafal/Desktop/C_projects/webasto_controller && /usr/local/bin/platformio -f -c clion init --ide clion
+	cd /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller && /usr/local/bin/platformio -f -c clion init --ide clion
 
 PLATFORMIO_REBUILD_PROJECT_INDEX: CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX
 PLATFORMIO_REBUILD_PROJECT_INDEX: CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/clean:
 .PHONY : CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/clean
 
 CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/depend:
-	cd /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rafal/Desktop/C_projects/webasto_controller /home/rafal/Desktop/C_projects/webasto_controller /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/PLATFORMIO_REBUILD_PROJECT_INDEX.dir/depend
 

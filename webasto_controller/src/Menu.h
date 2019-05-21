@@ -11,8 +11,13 @@
 class Menu {
 private:
     const uint8_t maxLevel = 2;
-    uint8_t currentPage = 0;
+    uint8_t currentPos = 0;
     uint8_t currentLevel = 0;
+
+public:
+    void printCurrentPage(uint8_t currentLevel, uint8_t currentPos);
+    void setHome();
+
 
 };
 

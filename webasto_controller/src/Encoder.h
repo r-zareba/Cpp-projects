@@ -11,15 +11,17 @@
 
 class Encoder {
 private:
-    uint8_t pinA;
-    uint8_t pinB;
+    const uint8_t pinA;
+    const uint8_t pinB;
     uint8_t minRange = 1;
-    uint8_t maxRange = 5;
+    uint8_t maxRange = 4;
     uint8_t currentPos = minRange;
     bool encoderAset = LOW;
     bool encoderBset = LOW;
 
 public:
+    static const uint8_t encoderDelay;
+
     Encoder(uint8_t pinA, uint8_t pinB);
     void encodeA();
     void encodeB();

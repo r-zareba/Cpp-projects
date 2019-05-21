@@ -43,10 +43,10 @@ RM = /home/rafal/Desktop/clion-2019.1.2/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafal/Desktop/C_projects/webasto_controller
+CMAKE_SOURCE_DIR = /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug
+CMAKE_BINARY_DIR = /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/webasto_controller.dir/depend.make
@@ -57,47 +57,61 @@ include CMakeFiles/webasto_controller.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/webasto_controller.dir/flags.make
 
+CMakeFiles/webasto_controller.dir/src/Button.cpp.o: CMakeFiles/webasto_controller.dir/flags.make
+CMakeFiles/webasto_controller.dir/src/Button.cpp.o: ../src/Button.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/webasto_controller.dir/src/Button.cpp.o"
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/webasto_controller.dir/src/Button.cpp.o -c /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Button.cpp
+
+CMakeFiles/webasto_controller.dir/src/Button.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/webasto_controller.dir/src/Button.cpp.i"
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Button.cpp > CMakeFiles/webasto_controller.dir/src/Button.cpp.i
+
+CMakeFiles/webasto_controller.dir/src/Button.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/webasto_controller.dir/src/Button.cpp.s"
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Button.cpp -o CMakeFiles/webasto_controller.dir/src/Button.cpp.s
+
 CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o: CMakeFiles/webasto_controller.dir/flags.make
 CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o: ../src/Encoder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o -c /home/rafal/Desktop/C_projects/webasto_controller/src/Encoder.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o"
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o -c /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Encoder.cpp
 
 CMakeFiles/webasto_controller.dir/src/Encoder.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/webasto_controller.dir/src/Encoder.cpp.i"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafal/Desktop/C_projects/webasto_controller/src/Encoder.cpp > CMakeFiles/webasto_controller.dir/src/Encoder.cpp.i
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Encoder.cpp > CMakeFiles/webasto_controller.dir/src/Encoder.cpp.i
 
 CMakeFiles/webasto_controller.dir/src/Encoder.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/webasto_controller.dir/src/Encoder.cpp.s"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafal/Desktop/C_projects/webasto_controller/src/Encoder.cpp -o CMakeFiles/webasto_controller.dir/src/Encoder.cpp.s
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Encoder.cpp -o CMakeFiles/webasto_controller.dir/src/Encoder.cpp.s
 
 CMakeFiles/webasto_controller.dir/src/Menu.cpp.o: CMakeFiles/webasto_controller.dir/flags.make
 CMakeFiles/webasto_controller.dir/src/Menu.cpp.o: ../src/Menu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/webasto_controller.dir/src/Menu.cpp.o"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/webasto_controller.dir/src/Menu.cpp.o -c /home/rafal/Desktop/C_projects/webasto_controller/src/Menu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/webasto_controller.dir/src/Menu.cpp.o"
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/webasto_controller.dir/src/Menu.cpp.o -c /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Menu.cpp
 
 CMakeFiles/webasto_controller.dir/src/Menu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/webasto_controller.dir/src/Menu.cpp.i"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafal/Desktop/C_projects/webasto_controller/src/Menu.cpp > CMakeFiles/webasto_controller.dir/src/Menu.cpp.i
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Menu.cpp > CMakeFiles/webasto_controller.dir/src/Menu.cpp.i
 
 CMakeFiles/webasto_controller.dir/src/Menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/webasto_controller.dir/src/Menu.cpp.s"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafal/Desktop/C_projects/webasto_controller/src/Menu.cpp -o CMakeFiles/webasto_controller.dir/src/Menu.cpp.s
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/Menu.cpp -o CMakeFiles/webasto_controller.dir/src/Menu.cpp.s
 
 CMakeFiles/webasto_controller.dir/src/main.cpp.o: CMakeFiles/webasto_controller.dir/flags.make
 CMakeFiles/webasto_controller.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/webasto_controller.dir/src/main.cpp.o"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/webasto_controller.dir/src/main.cpp.o -c /home/rafal/Desktop/C_projects/webasto_controller/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/webasto_controller.dir/src/main.cpp.o"
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/webasto_controller.dir/src/main.cpp.o -c /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/main.cpp
 
 CMakeFiles/webasto_controller.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/webasto_controller.dir/src/main.cpp.i"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafal/Desktop/C_projects/webasto_controller/src/main.cpp > CMakeFiles/webasto_controller.dir/src/main.cpp.i
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/main.cpp > CMakeFiles/webasto_controller.dir/src/main.cpp.i
 
 CMakeFiles/webasto_controller.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/webasto_controller.dir/src/main.cpp.s"
-	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafal/Desktop/C_projects/webasto_controller/src/main.cpp -o CMakeFiles/webasto_controller.dir/src/main.cpp.s
+	/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/src/main.cpp -o CMakeFiles/webasto_controller.dir/src/main.cpp.s
 
 # Object files for target webasto_controller
 webasto_controller_OBJECTS = \
+"CMakeFiles/webasto_controller.dir/src/Button.cpp.o" \
 "CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o" \
 "CMakeFiles/webasto_controller.dir/src/Menu.cpp.o" \
 "CMakeFiles/webasto_controller.dir/src/main.cpp.o"
@@ -105,12 +119,13 @@ webasto_controller_OBJECTS = \
 # External object files for target webasto_controller
 webasto_controller_EXTERNAL_OBJECTS =
 
+webasto_controller: CMakeFiles/webasto_controller.dir/src/Button.cpp.o
 webasto_controller: CMakeFiles/webasto_controller.dir/src/Encoder.cpp.o
 webasto_controller: CMakeFiles/webasto_controller.dir/src/Menu.cpp.o
 webasto_controller: CMakeFiles/webasto_controller.dir/src/main.cpp.o
 webasto_controller: CMakeFiles/webasto_controller.dir/build.make
 webasto_controller: CMakeFiles/webasto_controller.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable webasto_controller"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable webasto_controller"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/webasto_controller.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +138,6 @@ CMakeFiles/webasto_controller.dir/clean:
 .PHONY : CMakeFiles/webasto_controller.dir/clean
 
 CMakeFiles/webasto_controller.dir/depend:
-	cd /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rafal/Desktop/C_projects/webasto_controller /home/rafal/Desktop/C_projects/webasto_controller /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles/webasto_controller.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/webasto_controller.dir/depend
 

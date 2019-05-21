@@ -5,8 +5,9 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include <ArduinoSTL.h>
+//#include <ArduinoSTL.h>
 #include "Encoder.h"
+#include "Button.h"
 
 
 #define LED_1 2
@@ -38,33 +39,19 @@
 LiquidCrystal_I2C lcd(0x27, 16, 2); // Change the 0x27
 Encoder encoder(ENCODER_A, ENCODER_B);
 
-uint8_t encoderPos = 0;
+
+uint8_t encoderPos;
 static bool rotating = false;
-uint8_t encoderDelay = 5;
 
 static void doEncoderA();
 static void doEncoderB();
 
 static uint8_t arrow[8] = {0x0, 0x04 ,0x06, 0x1f, 0x06, 0x04, 0x00, 0x00};
 
-unsigned long
-    lastTimeLcd = 0,
-    lastTimeButton = 0;
-
-uint8_t lcdDelay = 20;
-uint8_t buttonDelay = 20;
-
 uint8_t currentLevel = 0;
-
-bool button1State;
-bool button2State;
-
-bool lastbutton1State = LOW;
-bool lastbutton2State = LOW;
 
 bool levelChanged = false;
 volatile bool posChanged = false;
-
 
 
 void printArrow(uint8_t row);
@@ -72,14 +59,14 @@ void printPage(const String &item1, const String &item2, uint8_t cursorAt);
 //std::vector<Settings> settings;
 
 
+Button button1(BUTTON_1, LOW);
+Button button2(BUTTON_2, LOW);
+
+
 void setup()
 {
     attachInterrupt(0, doEncoderA, CHANGE);
     attachInterrupt(1, doEncoderB, CHANGE);
-
-    pinMode(BUTTON_1, INPUT);
-    pinMode(BUTTON_2, INPUT);
-    pinMode(BUTTON_3, INPUT);
 
     Serial.begin(9600);
     lcd.begin();
@@ -108,7 +95,6 @@ void setup()
 void loop()
 {
 
-
     rotating = true;
     encoderPos = encoder.getCurrentPos();
 
@@ -119,49 +105,26 @@ void loop()
     }
 
 
-    if ((millis() - lastTimeLcd) > lcdDelay){
-//        lcd.clear();
-        Serial.print("Pos: ");
-        Serial.println(encoderPos);
-        Serial.print("Level: ");
-        Serial.println(currentLevel);
-        lastTimeLcd = millis();
+//    if ((millis() - lastTimeLcd) > lcdDelay){
+////        lcd.clear();
+//        Serial.print("Pos: ");
+//        Serial.println(encoderPos);
+//        Serial.print("Level: ");
+//        Serial.println(currentLevel);
+//        lastTimeLcd = millis();
+//    }
+
+    if (button1.isClicked()){
+        encoder.resetPos();
+        currentLevel ++;
+        levelChanged = true;
     }
 
-    bool button1 = digitalRead(BUTTON_1);
-    bool button2 = digitalRead(BUTTON_2);
-
-
-    if (button1 != lastbutton1State) lastTimeButton = millis();
-
-    if ((millis() - lastTimeButton) > buttonDelay){
-        if (button1 != button1State){
-            button1State = button1;
-
-            if (button1State == HIGH){
-                encoder.resetPos();
-                currentLevel ++;
-                levelChanged = true;
-            }
-        }
+    if (button2.isClicked()){
+        encoder.resetPos();
+        currentLevel --;
+        levelChanged = true;
     }
-
-
-    if (button2 != lastbutton2State) lastTimeButton = millis();
-
-    if ((millis() - lastTimeButton) > buttonDelay){
-        if (button2 != button2State){
-            button2State = button2;
-
-            if (button2State == HIGH){
-                encoder.resetPos();
-                currentLevel --;
-                levelChanged = true;
-            }
-        }
-    }
-    lastbutton1State = button1;
-    lastbutton2State = button2;
 
 
 
@@ -270,7 +233,7 @@ void printPage(const String &item1, const String &item2, uint8_t cursorAt){
 
 
 void doEncoderA(){
-    if (rotating) delay(encoderDelay); // debouncing
+    if (rotating) delay(Encoder::encoderDelay); // debouncing
     encoder.encodeA();
     rotating=false;
     posChanged = true;
@@ -278,7 +241,7 @@ void doEncoderA(){
 
 
 void doEncoderB(){
-    if (rotating) delay(encoderDelay); // debouncing
+    if (rotating) delay(Encoder::encoderDelay); // debouncing
     encoder.encodeB();
     rotating=false;
     posChanged = true;

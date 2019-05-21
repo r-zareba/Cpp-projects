@@ -48,10 +48,10 @@ RM = /home/rafal/Desktop/clion-2019.1.2/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafal/Desktop/C_projects/webasto_controller
+CMAKE_SOURCE_DIR = /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug
+CMAKE_BINARY_DIR = /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafal/Desktop/C_projects/webasto_controller/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafal/Desktop/GITHUB/Cpp_projects/webasto_controller/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -253,6 +253,33 @@ PLATFORMIO_TEST/fast:
 	$(MAKE) -f CMakeFiles/PLATFORMIO_TEST.dir/build.make CMakeFiles/PLATFORMIO_TEST.dir/build
 .PHONY : PLATFORMIO_TEST/fast
 
+src/Button.o: src/Button.cpp.o
+
+.PHONY : src/Button.o
+
+# target to build an object file
+src/Button.cpp.o:
+	$(MAKE) -f CMakeFiles/webasto_controller.dir/build.make CMakeFiles/webasto_controller.dir/src/Button.cpp.o
+.PHONY : src/Button.cpp.o
+
+src/Button.i: src/Button.cpp.i
+
+.PHONY : src/Button.i
+
+# target to preprocess a source file
+src/Button.cpp.i:
+	$(MAKE) -f CMakeFiles/webasto_controller.dir/build.make CMakeFiles/webasto_controller.dir/src/Button.cpp.i
+.PHONY : src/Button.cpp.i
+
+src/Button.s: src/Button.cpp.s
+
+.PHONY : src/Button.s
+
+# target to generate assembly for a file
+src/Button.cpp.s:
+	$(MAKE) -f CMakeFiles/webasto_controller.dir/build.make CMakeFiles/webasto_controller.dir/src/Button.cpp.s
+.PHONY : src/Button.cpp.s
+
 src/Encoder.o: src/Encoder.cpp.o
 
 .PHONY : src/Encoder.o
@@ -353,6 +380,9 @@ help:
 	@echo "... PLATFORMIO_UPLOAD"
 	@echo "... PLATFORMIO_CLEAN"
 	@echo "... PLATFORMIO_TEST"
+	@echo "... src/Button.o"
+	@echo "... src/Button.i"
+	@echo "... src/Button.s"
 	@echo "... src/Encoder.o"
 	@echo "... src/Encoder.i"
 	@echo "... src/Encoder.s"
