@@ -14,7 +14,7 @@ private:
     const uint8_t pinA;
     const uint8_t pinB;
     uint8_t minRange = 0;
-    uint8_t maxRange = 3;
+    uint8_t maxRange = 2;
     int8_t currentPos = minRange;
     bool encoderAset = LOW;
     bool encoderBset = LOW;

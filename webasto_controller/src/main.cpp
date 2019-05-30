@@ -34,7 +34,6 @@
 //};
 
 
-String menuLevel1[] = {"Option 1", "Option 2", "CURRENT TEMP", "SETTINGS"};
 uint8_t lastPos[3];
 
 
@@ -51,27 +50,56 @@ static void doEncoderA();
 static void doEncoderB();
 
 static uint8_t arrow[8] = {0x0, 0x04 ,0x06, 0x1f, 0x06, 0x04, 0x00, 0x00};
+static uint8_t hourArrow[] = {0x08, 0x0C, 0x0E, 0x1F, 0x0E, 0x0C, 0x08, 0x00};
 
 int8_t currentLevel = 0;
 
 bool levelChanged = false;
 volatile bool posChanged = false;
 
+// Read params
+float waterTemp = 33.3;
+float waterLevel = 50.2;
+float fuelLevel = 43.4;
+
+// Settings
+float temperatureSetting = 45.0;
+int8_t startMinute;
+int8_t startHour;
+int8_t endMinute;
+int8_t endHour;
+
+int8_t timeSetterPos;
+
+
 
 void printArrow(uint8_t row);
 void printPage(const String &item1, const String &item2, uint8_t cursorAt);
 void printSingleItem(const String &item, bool cursor);
+void printParam(const String &param, const float &value);
+void printParams(const String &param1, const String &param2,
+        const float &value1, const float &value2);
+
+template <typename T>
+void setSetting(const String &name, T &value, float step, Encoder &encoder);
+
+template <typename T>
+void setSetting(T &value, float step, Encoder &encoder);
+
+//void lockScreen()
+
+void keepInRange(int8_t &value, uint8_t min, uint8_t max);
+
+
 //std::vector<Settings> settings;
 
 
-Button button1(BUTTON_1, LOW);
-Button button2(BUTTON_2, LOW);
+Button nextButton(BUTTON_1, LOW);
+Button prevButton(BUTTON_2, LOW);
+Button homeButton(BUTTON_3, LOW);
 
-uint8_t temperatureSetting = 45;
 unsigned long currentTime;
 unsigned long printTime;
-
-uint8_t pos;
 
 
 void setup()
@@ -82,10 +110,13 @@ void setup()
     Serial.begin(9600);
     lcd.begin();
     lcd.clear();
-    lcd.createChar(0, arrow);   //Create the arrow symbol
+    // Create custom symbols
+    lcd.createChar(0, arrow);
+    lcd.createChar(1, hourArrow);
+
     lcd.home();
 
-    encoder.setRange(0, 3);
+    encoder.setRange(0, 2);
 //
 //    Settings settings1(1, 2, 3);
 //    Settings settings2(4, 5, 6);
@@ -108,25 +139,29 @@ void loop()
     rotating = true;
     encoderPos = encoder.getCurrentPos();
 
-//    if (currentLevel == 0) lastPos[0] = encoder.getCurrentPos();
-//    else if (currentLevel == 2) encoderPos = encoder.getCurrentPos();
-//    else if (currentLevel == 3) lastEncoderPos = encoderPos;
 
     if (levelChanged){
         lcd.clear();
-        if (currentLevel == 0) encoder.setRange(0, 3);
-        else if (currentLevel == 1 && lastEncoderPos == 3) encoder.setRange(0, 1);
+
+        if (currentLevel == 0) encoder.setRange(0, 2);
+        else if (currentLevel == 1 && lastPos[0] == 0) encoder.setRange(0, 2);
+        else if (currentLevel == 1 && lastPos[0] == 2) encoder.setRange(0, 1);
         levelChanged = false;
     }
 
     if (posChanged){
         lcd.clear();
+
+        // If was locked
+        if (currentLevel == 1 && lastPos[0] == 1){
+            currentLevel = 0;
+        }
+        lcd.backlight();
         posChanged = false;
     }
 
-
-    if (currentLevel >= 2) currentLevel = 2;
-    if (currentLevel <= 0) currentLevel = 0;
+    if (currentLevel == 2 && lastPos[0] == 2) keepInRange(currentLevel, 0, 2);
+    else keepInRange(currentLevel, 0, 1);
 
 
     currentTime = millis();
@@ -135,14 +170,14 @@ void loop()
         printTime = currentTime;
 //        Serial.print("  ");
 //        Serial.print(encoderPos);
-        Serial.print("--->");
-        Serial.print(lastPos[0]);
-        Serial.print(", ");
-        Serial.print(lastPos[1]);
-        Serial.print(", ");
-        Serial.print(lastPos[2]);
-        Serial.print("....");
-//        Serial.println(currentLevel);
+//        Serial.print("--->");
+//        Serial.print(lastPos[0]);
+//        Serial.print(", ");
+//        Serial.print(lastPos[1]);
+//        Serial.print(", ");
+//        Serial.print(lastPos[2]);
+//        Serial.print("....");
+        Serial.print(timeSetterPos);
     }
 
 
@@ -152,133 +187,107 @@ void loop()
 //    Serial.print(encoder.getCurrentPos());
 
 
-    if (button1.isClicked()){
+    if (nextButton.isClicked()){
         lastPos[currentLevel] = encoderPos;
-        if (currentLevel == 0) encoder.resetPos();
+        encoder.resetPos();
         currentLevel ++;
         levelChanged = true;
     }
 
-    if (button2.isClicked()){
-        if (currentLevel == 1) encoder.resetPos();
+    if (prevButton.isClicked()){
         currentLevel --;
+        encoder.setCurrentPos(lastPos[currentLevel]);
         levelChanged = true;
     }
 
-    pos = lastPos[currentLevel-1];
-    switch (currentLevel){
-        case 0:
-            switch (encoderPos){
-                case 0:
-                    printPage(menuLevel1[encoderPos], menuLevel1[encoderPos+1], 0);
-                    break;
-
-                case 1:
-                    printPage(menuLevel1[encoderPos-1], menuLevel1[encoderPos], 1);
-                    break;
-
-                case 2:
-                    printPage(menuLevel1[encoderPos], menuLevel1[encoderPos+1], 0);
-                    break;
-
-                case 3:
-                    printPage(menuLevel1[encoderPos-1], menuLevel1[encoderPos], 1);
-                    break;
-
-
-                default:
-                    printArrow(0);
-            }
-//            lastEncoderPos = encoderPos;
-            break;
-
-        case 1:
-            switch (pos){
-                case 0:
-                    printSingleItem("ASD", false);
-                    break;
-
-                case 1:
-                    printSingleItem("ASD", false);
-                    break;
-
-                case 2:
-                    printSingleItem("ASD", false);
-                    break;
-
-                case 3:
-                    pos = lastPos[currentLevel];
-                    switch (encoderPos){
-                        case 0:
-                            printPage("Temperature", "Start hour", 0);
-                            break;
-                        case 1:
-                            printPage("Temperature", "Start hour", 1);
-                            break;
-                        default:
-                            printArrow(0);
-                            break;
-                    }
-                    break;
-
-                case 5:
-                    printSingleItem("", false);
-                    break;
-
-
-                default:
-                    printArrow(0);
-            }
-//            lastEncoderPos = encoderPos;
-            break;
-
-
-        case 2:
-            switch (pos){
-                case 0:
-                    if (encoder.isRotatingRight()){
-                        temperatureSetting ++;
-                        encoder.resetRotating();
-                    } else if (encoder.isRotatingLeft()){
-                        temperatureSetting --;
-                        encoder.resetRotating();
-                    }
-
-                    lcd.setCursor(0, 0);
-                    lcd.print("Temperature: ");
-                    lcd.setCursor(13, 0);
-                    lcd.print(temperatureSetting);
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                default:
-                    break;
-            }
-
-//            settingLevel = encoder.getCurrentPos();
-
-//
-//        case 4:
-//            printPage("opcja 3", "opcja 4", 1);
-//            break;
-
-
-        default:
-            printArrow(0);
-            break;
+    if (homeButton.isClicked()){
+        currentLevel = 0;
+        encoder.resetPos();
+        levelChanged = true;
     }
 
+    /*
+     * Interactive menu logic implementation
+     */
+    // Level 0 - Main Menu, check only encoder value
+    if (currentLevel == 0 && encoderPos == 0){
+        printPage("CURRENT PARAMS", "LOCK", 0);
+    } else if (currentLevel == 0 && encoderPos == 1){
+        printPage("CURRENT PARAMS", "LOCK", 1);
+    } else if (currentLevel == 0 && encoderPos == 2){
+        printSingleItem("SETTINGS", true);
+    }
 
-//    if (currentLevel == 3 && encoderPos == 1){
-//        lcd.setCursor(1, 0);
-//        lcd.print("Temperature: ");
-//        lcd.setCursor(13, 0);
-//        lcd.print(temperatureSetting);
-//
-//        temperatureSetting = encoderPos*10;
-//    }
+    // Level 1 - check previous value and encoder pos
+    // CURRENT PARAMS clicked
+    if (currentLevel == 1 && lastPos[0] == 0 && encoderPos == 0){
+        printParams("WATER TEMP", "WATER LVL", waterTemp, waterLevel);
+    } else if (currentLevel == 1 && lastPos[0] == 0 && encoderPos == 1){
+        printParam("FUEL LVL", fuelLevel);
+    }
+    // LOCK clicked
+    else if (currentLevel == 1 && lastPos[0] == 1) lcd.noBacklight();
+
+    // SETTINGS clicked
+    else if (currentLevel == 1 && lastPos[0] == 2 && encoderPos == 0){
+        printPage("Temperature", "Time", 0);
+    } else if (currentLevel == 1 && lastPos[0] == 2 && encoderPos == 1){
+        printPage("Temperature", "Time", 1);
+    }
+
+    // SETTING -> Temperature
+    else if (currentLevel == 2 && lastPos[1] == 0){
+        setSetting("Temperature", temperatureSetting, 0.5, encoder);
+    }
+    // SETTING -> Time
+
+    //TODO
+    //if current level == 3 and lastpos[1] == 1 and timeSetterPos == 9 lub 10
+    // setSetting(start hour)
+    // TODO
+    else if (currentLevel == 2 && lastPos[1] == 1) {
+        keepInRange(startMinute, 0, 59);
+        keepInRange(endMinute, 0, 59);
+        keepInRange(startHour, 0, 23);
+        keepInRange(endHour, 0, 23);
+        keepInRange(timeSetterPos, 7, 23);
+
+        lcd.setCursor(0, 0);
+        lcd.print("START -");
+        lcd.setCursor(7, 0);
+        lcd.write(1); //my arrow
+        lcd.setCursor(9, 0);
+
+        if (startHour < 10) lcd.print(0);
+
+        lcd.print(startHour);
+        lcd.print(":");
+
+        if (startMinute < 10) lcd.print(0);
+
+        lcd.print(startMinute);
+        lcd.setCursor(0, 1);
+        lcd.print("END   -");
+        lcd.setCursor(7, 1);
+        lcd.write(1); //my arrow
+        lcd.setCursor(9, 1);
+
+        if (endHour < 10) lcd.print(0);
+
+        lcd.print(endHour);
+        lcd.print(":");
+        if (endMinute < 10) lcd.print(0);
+        lcd.print(endMinute);
+
+        lcd.setCursor(timeSetterPos, 0);
+        if (timeSetterPos > 15) lcd.setCursor(8+(timeSetterPos-16), 1);
+        lcd.print("_");
+
+        setSetting(timeSetterPos, 1, encoder);
+
+
+
+    }
 
 
 }
@@ -306,6 +315,57 @@ void printPage(const String &item1, const String &item2, uint8_t cursorAt){
     lcd.print(item2);
 }
 
+void printParam(const String &param, const float &value){
+    lcd.setCursor(0, 0);
+    lcd.print(param);
+    lcd.setCursor(12, 0);
+    lcd.print(value);
+}
+void printParams(const String &param1, const String &param2,
+                 const float &value1, const float &value2){
+
+    lcd.setCursor(0, 0);
+    lcd.print(param1);
+    lcd.setCursor(12, 0);
+    lcd.print(value1);
+
+    lcd.setCursor(0, 1);
+    lcd.print(param2);
+    lcd.setCursor(12, 1);
+    lcd.print(value2);
+}
+
+template <typename T>
+void setSetting(const String &name, T &value, float step, Encoder &encoderr){
+    if (encoder.isRotatingRight()){
+        value += step;
+        encoder.resetRotating();
+    } else if (encoder.isRotatingLeft()){
+        value -= step;
+        encoder.resetRotating();
+    }
+
+    printParam(name, value);
+
+}
+
+template <typename T>
+void setSetting(T &value, float step, Encoder &encoderr){
+    if (encoder.isRotatingRight()){
+        value += step;
+        encoder.resetRotating();
+    } else if (encoder.isRotatingLeft()){
+        value -= step;
+        encoder.resetRotating();
+    }
+
+}
+
+
+void keepInRange(int8_t &value, uint8_t min, uint8_t max){
+    if (value >= max) value = max;
+    if (value <= min) value = min;
+}
 
 
 void doEncoderA(){
