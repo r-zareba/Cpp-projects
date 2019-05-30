@@ -16,9 +16,11 @@ private:
     bool lastButtonState = idleState;
     bool currentState = idleState;
 
-public:
     static unsigned long lastTimeButton;
     static const uint8_t buttonDelay;
+
+public:
+
 
     Button(uint8_t pin, bool idleState);
     bool isClicked();

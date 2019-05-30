@@ -17,6 +17,8 @@ private:
 public:
     void printCurrentPage(uint8_t currentLevel, uint8_t currentPos);
     void setHome();
+    void turnOffScreen();
+    void turnOnScreen();
 
 
 };

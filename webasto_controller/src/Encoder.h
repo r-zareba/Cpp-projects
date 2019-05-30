@@ -13,11 +13,13 @@ class Encoder {
 private:
     const uint8_t pinA;
     const uint8_t pinB;
-    uint8_t minRange = 1;
-    uint8_t maxRange = 4;
-    uint8_t currentPos = minRange;
+    uint8_t minRange = 0;
+    uint8_t maxRange = 3;
+    int8_t currentPos = minRange;
     bool encoderAset = LOW;
     bool encoderBset = LOW;
+    bool rotatingRight = false;
+    bool rotatingLeft = false;
 
 public:
     static const uint8_t encoderDelay;
@@ -30,6 +32,9 @@ public:
     void resetPos();
     void setRange(uint8_t min, uint8_t max);
     void keepInRange();
+    bool isRotatingLeft() const;
+    bool isRotatingRight() const;
+    void resetRotating();
 
 
 };

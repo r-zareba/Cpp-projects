@@ -5,7 +5,7 @@
 #include "Encoder.h"
 
 
-const uint8_t Encoder::encoderDelay = 5;
+const uint8_t Encoder::encoderDelay = 6;
 
 
 Encoder::Encoder(uint8_t pinA, uint8_t pinB)
@@ -28,7 +28,11 @@ void Encoder::encodeA() {
     if (pinState != this->encoderAset) {
         this->encoderAset = !this->encoderAset;
 
-        if (this->encoderAset && !this->encoderBset) this->currentPos++;
+        if (this->encoderAset && !this->encoderBset){
+            this->currentPos++;
+            this->rotatingLeft = false;
+            this->rotatingRight = true;
+        }
     }
     this->keepInRange();
 }
@@ -39,7 +43,11 @@ void Encoder::encodeB() {
     if (pinState != this->encoderBset) {
         this->encoderBset = !this->encoderBset;
 
-        if (this->encoderBset && !this->encoderAset) this->currentPos--;
+        if (this->encoderBset && !this->encoderAset){
+            this->currentPos--;
+            this->rotatingRight = false;
+            this->rotatingLeft = true;
+        }
     }
     this->keepInRange();
 }
@@ -53,10 +61,25 @@ void Encoder::setCurrentPos(uint8_t pos) {
 }
 
 void Encoder::resetPos() {
-    this->setCurrentPos(1);
+    Serial.println("RESET POS");
+    this->setCurrentPos(this->minRange);
 }
 
 void Encoder::setRange(uint8_t min, uint8_t max) {
     this->minRange = min;
     this->maxRange = max;
+    this->keepInRange();
+}
+
+bool Encoder::isRotatingLeft() const {
+    return this->rotatingLeft;
+}
+
+bool Encoder::isRotatingRight() const {
+    return this->rotatingRight;
+}
+
+void Encoder::resetRotating() {
+    this->rotatingLeft = false;
+    this->rotatingRight = false;
 }
