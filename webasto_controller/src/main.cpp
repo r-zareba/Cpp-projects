@@ -79,6 +79,7 @@ void printSingleItem(const String &item, bool cursor);
 void printParam(const String &param, const float &value);
 void printParams(const String &param1, const String &param2,
         const float &value1, const float &value2);
+void printHourSetting();
 
 template <typename T>
 void setSetting(const String &name, T &value, float step, Encoder &encoder);
@@ -88,7 +89,7 @@ void setSetting(T &value, float step, Encoder &encoder);
 
 //void lockScreen()
 
-void keepInRange(int8_t &value, uint8_t min, uint8_t max);
+void keepInRange(int8_t &value, uint8_t min, uint8_t max, bool overflow);
 
 
 //std::vector<Settings> settings;
@@ -160,8 +161,10 @@ void loop()
         posChanged = false;
     }
 
-    if (currentLevel == 2 && lastPos[0] == 2) keepInRange(currentLevel, 0, 2);
-    else keepInRange(currentLevel, 0, 1);
+    keepInRange(currentLevel, 0, 4, false);
+    if (currentLevel == 2 && lastPos[0] == 2) keepInRange(currentLevel, 0, 2, false);
+    if (currentLevel == 2 && lastPos[0] == 2 && lastPos[1] == 1) keepInRange(currentLevel, 0, 4, false);
+//    else keepInRange(currentLevel, 0, 1, false);
 
 
     currentTime = millis();
@@ -169,15 +172,15 @@ void loop()
     if (currentTime - printTime >=500){
         printTime = currentTime;
 //        Serial.print("  ");
-//        Serial.print(encoderPos);
-//        Serial.print("--->");
-//        Serial.print(lastPos[0]);
-//        Serial.print(", ");
-//        Serial.print(lastPos[1]);
-//        Serial.print(", ");
-//        Serial.print(lastPos[2]);
-//        Serial.print("....");
-        Serial.print(timeSetterPos);
+        Serial.print(encoderPos);
+        Serial.print("--->");
+        Serial.print(lastPos[0]);
+        Serial.print(", ");
+        Serial.print(lastPos[1]);
+        Serial.print(", ");
+        Serial.print(lastPos[2]);
+        Serial.print("....");
+//        Serial.print(timeSetterPos);
     }
 
 
@@ -236,7 +239,7 @@ void loop()
     }
 
     // SETTING -> Temperature
-    else if (currentLevel == 2 && lastPos[1] == 0){
+    else if (currentLevel == 2 && lastPos[0] == 2 && lastPos[1] == 0){
         setSetting("Temperature", temperatureSetting, 0.5, encoder);
     }
     // SETTING -> Time
@@ -245,49 +248,31 @@ void loop()
     //if current level == 3 and lastpos[1] == 1 and timeSetterPos == 9 lub 10
     // setSetting(start hour)
     // TODO
-    else if (currentLevel == 2 && lastPos[1] == 1) {
-        keepInRange(startMinute, 0, 59);
-        keepInRange(endMinute, 0, 59);
-        keepInRange(startHour, 0, 23);
-        keepInRange(endHour, 0, 23);
-        keepInRange(timeSetterPos, 7, 23);
+    else if (currentLevel == 2 && lastPos[0] == 2 && lastPos[1] == 1) {
+        printHourSetting();
 
-        lcd.setCursor(0, 0);
-        lcd.print("START -");
-        lcd.setCursor(7, 0);
-        lcd.write(1); //my arrow
-        lcd.setCursor(9, 0);
-
-        if (startHour < 10) lcd.print(0);
-
-        lcd.print(startHour);
-        lcd.print(":");
-
-        if (startMinute < 10) lcd.print(0);
-
-        lcd.print(startMinute);
-        lcd.setCursor(0, 1);
-        lcd.print("END   -");
-        lcd.setCursor(7, 1);
-        lcd.write(1); //my arrow
-        lcd.setCursor(9, 1);
-
-        if (endHour < 10) lcd.print(0);
-
-        lcd.print(endHour);
-        lcd.print(":");
-        if (endMinute < 10) lcd.print(0);
-        lcd.print(endMinute);
+//        if (timeSetterPos == 11) timeSetterPos = 12;
+//        if (timeSetterPos == 16) timeSetterPos = 17;
 
         lcd.setCursor(timeSetterPos, 0);
-        if (timeSetterPos > 15) lcd.setCursor(8+(timeSetterPos-16), 1);
+        if (timeSetterPos > 13) lcd.setCursor(11+(timeSetterPos-16), 1);
         lcd.print("_");
 
         setSetting(timeSetterPos, 1, encoder);
-
-
-
+    } else if (currentLevel == 3 && lastPos[0] == 2 && lastPos[1] == 1 && (timeSetterPos == 9 || timeSetterPos == 10)){
+        printHourSetting();
+        setSetting(startHour, 1, encoder);
+    } else if (currentLevel == 3 && lastPos[0] == 2 && lastPos[1] == 1 && (timeSetterPos == 12 || timeSetterPos == 13)){
+        printHourSetting();
+        setSetting(startMinute, 1, encoder);
+    } else if (currentLevel == 3 && lastPos[0] == 2 && lastPos[1] == 1 && (timeSetterPos == 14 || timeSetterPos == 15)){
+        printHourSetting();
+        setSetting(endHour, 1, encoder);
+    } else if (currentLevel == 3 && lastPos[0] == 2 && lastPos[1] == 1 && (timeSetterPos == 17 || timeSetterPos == 18)){
+        printHourSetting();
+        setSetting(endMinute, 1, encoder);
     }
+
 
 
 }
@@ -335,6 +320,43 @@ void printParams(const String &param1, const String &param2,
     lcd.print(value2);
 }
 
+void printHourSetting(){
+    keepInRange(startMinute, 0, 59, true);
+    keepInRange(endMinute, 0, 59, true);
+    keepInRange(startHour, 0, 23, true);
+    keepInRange(endHour, 0, 23, true);
+    keepInRange(timeSetterPos, 9, 18, true);
+
+    lcd.setCursor(0, 0);
+    lcd.print("START -");
+    lcd.setCursor(7, 0);
+    lcd.write(1); //my arrow
+    lcd.setCursor(9, 0);
+
+    if (startHour < 10) lcd.print(0);
+
+    lcd.print(startHour);
+    lcd.print(":");
+
+    if (startMinute < 10) lcd.print(0);
+
+    lcd.print(startMinute);
+    lcd.setCursor(0, 1);
+    lcd.print("END   -");
+    lcd.setCursor(7, 1);
+    lcd.write(1); //my arrow
+    lcd.setCursor(9, 1);
+
+    if (endHour < 10) lcd.print(0);
+
+    lcd.print(endHour);
+    lcd.print(":");
+    if (endMinute < 10) lcd.print(0);
+    lcd.print(endMinute);
+}
+
+
+// TODO przeniesc do klasy enkoder !
 template <typename T>
 void setSetting(const String &name, T &value, float step, Encoder &encoderr){
     if (encoder.isRotatingRight()){
@@ -362,9 +384,16 @@ void setSetting(T &value, float step, Encoder &encoderr){
 }
 
 
-void keepInRange(int8_t &value, uint8_t min, uint8_t max){
-    if (value >= max) value = max;
-    if (value <= min) value = min;
+void keepInRange(int8_t &value, uint8_t min, uint8_t max, bool overflow=false){
+
+    if (overflow){
+        if (value > max) value = min;
+        if (value < min) value = max;
+    } else{
+        if (value >= max) value = max;
+        if (value <= min) value = min;
+    }
+
 }
 
 
