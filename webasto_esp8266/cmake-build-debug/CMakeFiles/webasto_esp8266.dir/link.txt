@@ -1,0 +1,1 @@
+/home/rafal/.platformio/packages/toolchain-xtensa/bin/xtensa-lx106-elf-g++  -g  -rdynamic CMakeFiles/webasto_esp8266.dir/src/Button.cpp.o CMakeFiles/webasto_esp8266.dir/src/Encoder.cpp.o CMakeFiles/webasto_esp8266.dir/src/main.cpp.o  -o webasto_esp8266 
