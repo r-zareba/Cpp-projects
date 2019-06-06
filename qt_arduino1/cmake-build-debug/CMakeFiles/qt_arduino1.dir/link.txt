@@ -1,0 +1,1 @@
+/home/rafal/.platformio/packages/toolchain-atmelavr/bin/avr-g++  -g  -rdynamic CMakeFiles/qt_arduino1.dir/src/Button.cpp.o CMakeFiles/qt_arduino1.dir/src/main.cpp.o  -o qt_arduino1 
